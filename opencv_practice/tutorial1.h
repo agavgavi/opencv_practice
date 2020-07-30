@@ -10,7 +10,7 @@ private:
 public:
     Tutorial1();
     int LoadImage(string image_name, string windowName);
-    int CreateImage(string windowName);
+    int CreateImage(string windowName, int blue, int green, int red);
 };
 
 #endif // TUTORIAL1_H
