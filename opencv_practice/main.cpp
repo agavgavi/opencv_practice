@@ -1,16 +1,18 @@
 #include "mainwindow.h"
-#include "tutorial1.h"
+#include "ImageFuncs.h"
+#include "VideoFuncs.h"
 
 #include <QApplication>
 
 int main(/*int argc, char *argv[]*/)
 {
 
-    Tutorial1 tut;
+    ImageFunctions img; // Class for all Image tutorials
+    VideoFunctions vid; // Class for all Video Tutorials
 
-    tut.LoadImage("../images/eagle.png", "My First OpenCV Program"); // Load image from disk and display.
+    img.LoadImage("../images/eagle.png", "My First OpenCV Program"); // Load image from disk and display.
 
-    tut.CreateImage("Window with Blank Green Image", 100, 250, 30);   // Display a new fresh window with the BGR colors passed in.
+    img.CreateImage("Window with Blank Green Image", 100, 250, 30);   // Display a new fresh window with the BGR colors passed in.
 
     return 0;
 

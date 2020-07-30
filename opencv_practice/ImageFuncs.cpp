@@ -1,12 +1,12 @@
-#include "tutorial1.h"
+#include "ImageFuncs.h"
 #include <opencv4/opencv2/opencv.hpp>
 
-Tutorial1::Tutorial1()
+ImageFunctions::ImageFunctions()
 {
 }
 
 // A function to load a specific image passed in on object creation.
-int Tutorial1::LoadImage(string image_name, string windowName) {
+int ImageFunctions::LoadImage(string image_name, string windowName) {
     cv::Mat image = cv::imread(image_name); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
                                             /* imread has some flags we can do:
                                              * IMREAD_UNCHANGED: allows for alpha channels
@@ -36,7 +36,7 @@ int Tutorial1::LoadImage(string image_name, string windowName) {
 }
 
 
-int Tutorial1::CreateImage(string windowName, int blue, int green, int red) {
+int ImageFunctions::CreateImage(string windowName, int blue, int green, int red) {
 
     cv::Mat image(600,800, CV_8UC3, cv::Scalar(blue,green,red)); // Create a material instead of from an image or video on disk but through the constructor. There are many options for parameters.
                                                                  /* The constructor takes:

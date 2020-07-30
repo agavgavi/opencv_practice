@@ -1,16 +1,16 @@
-#ifndef TUTORIAL1_H
-#define TUTORIAL1_H
+#ifndef IMAGEFUNCS_H
+#define IMAGEFUNCS_H
 
 
 #include <iostream>
 using namespace std;
-class Tutorial1
+class ImageFunctions
 {
 private:
 public:
-    Tutorial1();
+    ImageFunctions();
     int LoadImage(string image_name, string windowName);
     int CreateImage(string windowName, int blue, int green, int red);
 };
 
-#endif // TUTORIAL1_H
+#endif // IMAGEFUNCS_H
