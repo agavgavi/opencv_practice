@@ -3,10 +3,13 @@
 
 #include <QApplication>
 
-int main(int argc, char *argv[])
+int main(/*int argc, char *argv[]*/)
 {
 
-    Tutorial1 hw("../images/eagle.png", "My First OpenCV Program");
+    Tutorial1 tut;
+
+    tut.LoadImage("../images/eagle.png", "My First OpenCV Program"); // Load image from disk and display.
+    tut.CreateImage("Window with Blank Image");
 
     return 0;
 

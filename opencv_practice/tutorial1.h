@@ -6,8 +6,11 @@
 using namespace std;
 class Tutorial1
 {
+private:
 public:
-    Tutorial1(string image_name, string windowName);
+    Tutorial1();
+    int LoadImage(string image_name, string windowName);
+    int CreateImage(string windowName);
 };
 
 #endif // TUTORIAL1_H
