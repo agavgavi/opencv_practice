@@ -1,9 +1,9 @@
-#include "helloworld.h"
+#include "tutorial1.h"
 #include <opencv4/opencv2/opencv.hpp>
 #include <iostream>
 
 using namespace cv;
-HelloWorld::HelloWorld(string image_name, string windowName)
+Tutorial1::Tutorial1(string image_name, string windowName)
 {
     Mat image = imread(image_name);
 

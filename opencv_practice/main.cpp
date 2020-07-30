@@ -1,12 +1,12 @@
 #include "mainwindow.h"
-#include "helloworld.h"
+#include "tutorial1.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
 
-    HelloWorld hw("../images/eagle.png", "My First OpenCV Program");
+    Tutorial1 hw("../images/eagle.png", "My First OpenCV Program");
 
     return 0;
 
