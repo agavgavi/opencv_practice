@@ -35,7 +35,7 @@ int ImageFunctions::LoadImage(string image_name, string windowName) {
     return 0;
 }
 
-
+// A function that will create a blank image of the same color as the 3 elements passed into it.
 int ImageFunctions::CreateImage(string windowName, int blue, int green, int red) {
 
     cv::Mat image(600,800, CV_8UC3, cv::Scalar(blue,green,red)); // Create a material instead of from an image or video on disk but through the constructor. There are many options for parameters.
@@ -58,5 +58,10 @@ int ImageFunctions::CreateImage(string windowName, int blue, int green, int red)
     cv::waitKey(0); // Finally we wait for any key to be pressed before continuing the code. The next line won't run until a key is pressed.
 
     cv::destroyWindow(windowName);  // After the key is pressed we destroy the window we created earlier.
+    return 0;
+}
+
+// A function that will do a direct copy of an image. Pass it the url of the image and it will save a copy
+int ImageFunctions::CopyImage(string image_name) {
     return 0;
 }
