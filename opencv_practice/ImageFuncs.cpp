@@ -179,10 +179,10 @@ int ImageFunctions::EditContrast(string src_url, int amount) {
                                                              */
 
     string windowNameOG = "Original Image";                                 // All of our new windows need names so we specify them to list how much the image was edited by.
-    string windowNameHigh1 = "Contrast increased by " + to_string(amount);
-    string windowNameHigh2 = "Contrast increased by " + to_string(2*amount);
-    string windowNameLow1 = "Contrast decreased by " + to_string((double) 1/amount);
-    string windowNameLow2 = "Contrast decreased by " + to_string((double) 1/(2*amount));
+    string windowNameHigh1 = "Contrast increased by x" + to_string(amount);
+    string windowNameHigh2 = "Contrast increased by x" + to_string(2*amount);
+    string windowNameLow1 = "Contrast decreased by x" + to_string((double) 1/amount);
+    string windowNameLow2 = "Contrast decreased by x" + to_string((double) 1/(2*amount));
 
                                                         // Then we create all the named windows
     cv::namedWindow(windowNameOG, cv::WINDOW_NORMAL);

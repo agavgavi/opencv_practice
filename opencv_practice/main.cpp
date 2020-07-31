@@ -44,7 +44,7 @@ int image_funcs(ImageFunctions& img) {
 int video_funcs(VideoFunctions& vid) {
     int status = 0;
 
-    status = vid.PlayVideo("../videos/lights_vid.mov", "Displaying Smoke Video");   // Show a video file.
+    status = vid.PlayVideo("../videos/lights_vid.mov", "Displaying Lights Video");   // Show a video file.
 
     if(status == -1) {
         return -1;
