@@ -12,6 +12,7 @@ public:
     int LoadImage(string image_name, string windowName);
     int CreateImage(string windowName, int blue, int green, int red);
     int CopyImage(string src_url, string dest_url);
+    int EditBrightness(string src_url, int amount);
 };
 
 #endif // IMAGEFUNCS_H

@@ -96,3 +96,56 @@ int ImageFunctions::CopyImage(string src_url, string dest_url) {
 
     return 0;
 }
+
+// Adjust the brightness up and down in steps of two from the inputted int. So if amount = 20, increase brightness by 20, 40, then decrease by -20, -40
+int ImageFunctions::EditBrightness(string src_url, int amount) {
+
+    cv::Mat image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
+
+
+    if (image.empty()) {    // If anything goes wrong, the Mat image will be empty, so we can check for that and then spit out an error message.
+        cerr << endl << "ERROR: Could not locate/open image: \'" << src_url << "\'" << endl;
+        return -1; // Finally we return out of the Class to allow for the program to end.
+    }
+
+    cv::Mat imageBrightnessHigh1, imageBrightnessHigh2, imageBrightnessLow1, imageBrightnessLow2; // Create 4 mats for the 4 steps of brightness we are editing.
+
+    image.convertTo(imageBrightnessHigh1,-1, 1, amount); // Converts the brightness of the image for all 4 mats and saved it to an output Mat.
+    image.convertTo(imageBrightnessHigh2,-1, 1, amount*2);
+    image.convertTo(imageBrightnessLow1,-1, 1, -amount);
+    image.convertTo(imageBrightnessLow2,-1, 1, -amount*2);
+                                                            // convertTo works as so:
+                                                            /* It takes 4 parameters.
+                                                             * m: the output mat where the edited image will be saved to. Notice that this can work in place, but by default the original image isn't touched.
+                                                             * rtype: what the type of the output image is. if the value is negative, it will just base it on the input image.
+                                                             * alpha: A base multiple that each value will be multipled by in the original image.
+                                                             * beta: The value offset that will be added to each pixel in the base image.
+                                                             *
+                                                             * This loeads to a formula something like this:
+                                                             * pixel value in output image = pixel value in input image * alpha + beta.
+                                                             */
+
+    string windowNameOG = "Original Image";                                 // All of our new windows need names so we specify them to list how much the image was edited by.
+    string windowNameHigh1 = "Brightness increased by " + to_string(amount);
+    string windowNameHigh2 = "Brightness increased by " + to_string(2*amount);
+    string windowNameLow1 = "Brightness decreased by " + to_string(-amount);
+    string windowNameLow2 = "Brightness decreased by " + to_string(-2*amount);
+
+                                                        // Then we create all the named windows
+    cv::namedWindow(windowNameOG, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameHigh1, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameHigh2, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameLow1, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameLow2, cv::WINDOW_NORMAL);
+
+                                                        // Then we actually display all the named windows with the specific mats that correspond to them.
+    cv::imshow(windowNameOG, image);
+    cv::imshow(windowNameHigh1, imageBrightnessHigh1);
+    cv::imshow(windowNameHigh2, imageBrightnessHigh2);
+    cv::imshow(windowNameLow1, imageBrightnessLow1);
+    cv::imshow(windowNameLow2, imageBrightnessLow2);
+
+    // Here we wait for input then kill all of the window processes.
+    cv::waitKey(0);
+    cv::destroyAllWindows();
+}
