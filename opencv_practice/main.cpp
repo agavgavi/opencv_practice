@@ -31,6 +31,12 @@ int image_funcs(ImageFunctions& img) {
         return -1;
     }
 
+    status = img.EditContrast("../images/eagle.png", 2); // Adjust contrast of image by 2, 4, 1/2, 1/4
+
+    if(status == -1) {
+        return -1;
+    }
+
     return 0;
 }
 
@@ -38,7 +44,7 @@ int image_funcs(ImageFunctions& img) {
 int video_funcs(VideoFunctions& vid) {
     int status = 0;
 
-    status = vid.PlayVideo("../videos/smoke_vid.mov", "Displaying Smoke Video");   // Show a video file.
+    status = vid.PlayVideo("../videos/lights_vid.mov", "Displaying Smoke Video");   // Show a video file.
 
     if(status == -1) {
         return -1;
@@ -56,7 +62,13 @@ int video_funcs(VideoFunctions& vid) {
 //        return -1;
 //    }
 
-    status = vid.EditBrightness("../videos/smoke_vid.mov", 50); // Adjust brightness of video by +- 50 and +-100
+    status = vid.EditBrightness("../videos/lights_vid.mov", 50); // Adjust brightness of video by +- 50 and +-100
+
+    if(status == -1) {
+        return -1;
+    }
+
+    status = vid.EditContrast("../videos/lights_vid.mov", 2); // Adjust contrast by 2, 4, 1/2, and 1/4
 
     if(status == -1) {
         return -1;

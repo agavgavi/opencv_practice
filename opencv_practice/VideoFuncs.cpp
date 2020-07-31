@@ -210,3 +210,9 @@ int VideoFunctions::EditBrightness(string video_url, int amount) {
     cv::destroyAllWindows();  // After the key is pressed we destroy all video windows created
     return 0;
 }
+
+// Edit contrast on a saved video by a specified amount. Similar to ImageFunctions::EditContrast except with video.
+int VideoFunctions::EditContrast(string video_url, int amount) {
+
+    return 0;
+}
