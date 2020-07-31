@@ -41,6 +41,12 @@ int main(/*int argc, char *argv[]*/)
         return -1;
     }
 
+    status = vid.SaveVideo(0, "../videos/savedCam.mp4");   // Display webcam capture and save it
+
+    if(status == -1) {
+        return -1;
+    }
+
     return 0;
 
 

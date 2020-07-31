@@ -10,6 +10,7 @@ public:
     VideoFunctions();
     int PlayVideo(string video_url, string windowName);
     int ShowCamera(int camera_device, string windowName);
+    int SaveVideo(int camera_device, string dest_url);
 };
 
 #endif // VIDEOFUNCTIONS_H
