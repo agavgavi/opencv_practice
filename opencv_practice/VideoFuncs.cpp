@@ -8,7 +8,7 @@ VideoFunctions::VideoFunctions()
 
 
 // This function will take in a URL for a video and the name of the window you want to display it in, open the video,
-// display the FPS, and then when the video is done or the user presses ESC the video will close.
+// display the FPS, and then when the video is done or the user presses 'q' the video will close.
 int VideoFunctions::PlayVideo(string video_url, string windowName) {
 
     cv::VideoCapture cap(video_url); // Create a video capture object from the video url.
@@ -41,8 +41,8 @@ int VideoFunctions::PlayVideo(string video_url, string windowName) {
 
         cv::imshow(windowName, frame); // Show the specific frame in a named window.
 
-        if(cv::waitKey(10) == 27) { // Wait for the ESC for 10 ms. If that key isn't pressed or any other key is pressed, do nothing and continue to next iteration of the loop.
-                                    // If ESC is pressed, break out of the while loop and end the video.
+        if(cv::waitKey(10) == 'q') { // Wait for the 'q' key for 10 ms. If that key isn't pressed or any other key is pressed, do nothing and continue to next iteration of the loop.
+                                    // If 'q' key is pressed, break out of the while loop and end the video.
             cout << "Escape Key pressed. Closing \'" << video_url << "\'" << endl;
             break;
         }
@@ -60,8 +60,9 @@ int VideoFunctions::ShowCamera(int camera_device, string windowName) {
         cin.get();
         return -1;
     }
-
+    cap.set(cv::CAP_PROP_FPS, 24);
     double fps = cap.get(cv::CAP_PROP_FPS); // Store the FPS of the camera into a variable.
+
     cout << "Frames Per Second of camera : " << fps << endl; // And then prints it out.
 
     double width = cap.get(cv::CAP_PROP_FRAME_WIDTH); // Store width and height of camera into variables.
@@ -83,8 +84,8 @@ int VideoFunctions::ShowCamera(int camera_device, string windowName) {
 
         cv::imshow(windowName, frame); // Show the specific frame in a named window.
 
-        if(cv::waitKey(10) == 27) { // Wait for the ESC for 10 ms. If that key isn't pressed or any other key is pressed, do nothing and continue to next iteration of the loop.
-                                    // If ESC is pressed, break out of the while loop and end the camera capture.
+        if(cv::waitKey(10) == 'q') { // Wait for the 'q' key for 10 ms. If that key isn't pressed or any other key is pressed, do nothing and continue to next iteration of the loop.
+                                    // If 'q' is pressed, break out of the while loop and end the camera capture.
             cout << "Escape Key pressed. Closing video camera" << endl;
             break;
         }
