@@ -25,7 +25,11 @@ int image_funcs(ImageFunctions& img) {
 //        return -1;
 //    }
 
-    status = img.EditBrightness("../images/eagle.png", 50);
+    status = img.EditBrightness("../images/eagle.png", 50); // Adjust brightness of image by +- 50 and +-100
+
+    if(status == -1) {
+        return -1;
+    }
 
     return 0;
 }
@@ -51,6 +55,12 @@ int video_funcs(VideoFunctions& vid) {
 //    if(status == -1) {
 //        return -1;
 //    }
+
+    status = vid.EditBrightness("../videos/smoke_vid.mov", 50); // Adjust brightness of video by +- 50 and +-100
+
+    if(status == -1) {
+        return -1;
+    }
 
     return 0;
 }
