@@ -23,6 +23,12 @@ int main(/*int argc, char *argv[]*/)
         return -1;
     }
 
+    status = img.CopyImage("../images/eagle.png", "../images/newEagle.png"); // Load image from disk and save it under a new name.
+
+    if(status == -1) {
+        return -1;
+    }
+
     status = vid.PlayVideo("../videos/smoke_vid.mov", "Displaying Smoke Video");   // Show a video file.
 
     if(status == -1) {

@@ -11,7 +11,7 @@ public:
     ImageFunctions();
     int LoadImage(string image_name, string windowName);
     int CreateImage(string windowName, int blue, int green, int red);
-    int CopyImage(string image_name);
+    int CopyImage(string src_url, string dest_url);
 };
 
 #endif // IMAGEFUNCS_H

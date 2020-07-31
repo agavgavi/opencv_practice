@@ -14,8 +14,7 @@ int VideoFunctions::PlayVideo(string video_url, string windowName) {
     cv::VideoCapture cap(video_url); // Create a video capture object from the video url.
 
     if(cap.isOpened() == false) { // Similar check to working with images (image.empty()), only difference is if there is an error, cap.isOpened will be false.
-        cout << "Cannot open video file: \'" << video_url << "\'" << endl;
-        cin.get();
+        cerr << endl << "ERROR: Cannot open video file: \'" << video_url << "\'" << endl;
         return -1;
     }
 
@@ -56,8 +55,7 @@ int VideoFunctions::ShowCamera(int camera_device, string windowName) {
     cv::VideoCapture cap(camera_device); // Create a video capture object from the camera int.
 
     if(cap.isOpened() == false) { // Similar check to working with images (image.empty()), only difference is if there is an error, cap.isOpened will be false.
-        cout << "Cannot open video camera" << endl;
-        cin.get();
+        cerr << endl << "ERROR: Cannot open video camera" << endl;
         return -1;
     }
     cap.set(cv::CAP_PROP_FPS, 24);
