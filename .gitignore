@@ -30,4 +30,7 @@
 *.exe
 *.out
 *.app
+
+# custom ignores
 build-*
+videos/*
