@@ -291,6 +291,53 @@ int ImageFunctions::Blur(string src_url, int amount) {
     return 0;
 }
 
+//! This function will apply a homogeneous and a gaussian blur to an image with a 3x3 and 5x5 Kernel size.
+int ImageFunctions::Blur3_5(string src_url) {
+
+
+    cv::Mat image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
+
+
+    if (image.empty()) {    // If anything goes wrong, the Mat image will be empty, so we can check for that and then spit out an error message.
+        cerr << endl << "ERROR: Could not locate/open image: \'" << src_url << "\'" << endl;
+        return -1; // Finally we return out of the Class to allow for the program to end.
+    }
+
+    cv::Mat image_blured_homogeneous3, image_blured_gaussian3,
+            image_blured_homogeneous5, image_blured_gaussian5; // Create a Mat to store blurred image
+
+    cv::blur(image, image_blured_homogeneous3, cv::Size(3,3)); // Perform a homogeneous blur across the whole image of a 3 x 3 kernel.
+    cv::GaussianBlur(image, image_blured_gaussian3, cv::Size(3,3),0); // Perform a gaussian blur across the whole image of a 3 x 3 kernel.
+
+    cv::blur(image, image_blured_homogeneous5, cv::Size(5,5)); // Perform a homogeneous blur across the whole image of a 5 x 5 kernel.
+    cv::GaussianBlur(image, image_blured_gaussian5, cv::Size(5,5),0); // Perform a gaussian blur across the whole image of a 5 x 5 kernel.
+
+    string windowNameBluredHomogeneous3 = "Image Homogeneous Blured with 3 x 3 Kernel.";
+    string windowNameBluredGaussian3 = "Image Gaussian Blured with 3 x 3 Kernel.";
+
+    string windowNameBluredHomogeneous5 = "Image Homogeneous Blured with 5 x 5 Kernel.";
+    string windowNameBluredGaussian5 = "Image Gaussian Blured with 5 x 5 Kernel.";
+
+                                                                        // 3x3 stuff
+    cv::namedWindow(windowNameBluredHomogeneous3, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameBluredGaussian3, cv::WINDOW_NORMAL);
+
+    cv::imshow(windowNameBluredHomogeneous3, image_blured_homogeneous3);
+    cv::imshow(windowNameBluredGaussian3, image_blured_gaussian3);
+                                                                        // 5x5 stuff
+    cv::namedWindow(windowNameBluredHomogeneous5, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameBluredGaussian5, cv::WINDOW_NORMAL);
+
+    cv::imshow(windowNameBluredHomogeneous5, image_blured_homogeneous5);
+    cv::imshow(windowNameBluredGaussian5, image_blured_gaussian5);
+    // Here we wait for input then kill all of the window processes.
+    cv::waitKey(0);
+    cv::destroyAllWindows();
+
+
+    return 0;
+}
+
 //! This function will Invert a specified image
 int ImageFunctions::InvertImage(string src_url){
 
@@ -314,6 +361,75 @@ int ImageFunctions::InvertImage(string src_url){
 
     cv::imshow(windowName, image);
     cv::imshow(windowNameBlured, image_inverted);
+    // Here we wait for input then kill all of the window processes.
+    cv::waitKey(0);
+    cv::destroyAllWindows();
+
+
+    return 0;
+}
+
+//! This function will erode an image based on a 3x3 and 5x5 kernel size.
+int ImageFunctions::Erode(string src_url, int amount) {
+
+
+    cv::Mat image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
+
+
+    if (image.empty()) {    // If anything goes wrong, the Mat image will be empty, so we can check for that and then spit out an error message.
+        cerr << endl << "ERROR: Could not locate/open image: \'" << src_url << "\'" << endl;
+        return -1; // Finally we return out of the Class to allow for the program to end.
+    }
+
+    cv::Mat image_eroded; // Create a Mat to store eroded 3x3 image
+    cv::erode(image, image_eroded, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(amount,amount))); // Perform an amount x amount erosion to the image.
+
+    string windowName = "Original Image";
+    string windowNameEroded = "Image Eroded with " + to_string(amount) + " x " + to_string(amount) + " Kernel.";
+
+    cv::namedWindow(windowName, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameEroded, cv::WINDOW_NORMAL);
+
+    cv::imshow(windowName, image);
+    cv::imshow(windowNameEroded, image_eroded);
+
+    // Here we wait for input then kill all of the window processes.
+    cv::waitKey(0);
+    cv::destroyAllWindows();
+
+
+    return 0;
+}
+
+//! This function will erode an image based on a 3x3 and 5x5 kernel size.
+int ImageFunctions::Erode3_5(string src_url) {
+
+
+    cv::Mat image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
+
+
+    if (image.empty()) {    // If anything goes wrong, the Mat image will be empty, so we can check for that and then spit out an error message.
+        cerr << endl << "ERROR: Could not locate/open image: \'" << src_url << "\'" << endl;
+        return -1; // Finally we return out of the Class to allow for the program to end.
+    }
+
+    cv::Mat image_eroded3; // Create a Mat to store eroded 3x3 image
+    cv::Mat image_eroded5; // Create a Mat to store eroded 5x5 image
+    cv::erode(image, image_eroded3, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3,3))); // Perform an 3 x 3 erosion to the image.
+    cv::erode(image, image_eroded5, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(5,5))); // Perform an 5 x 5 erosion to the image.
+
+    string windowName = "Original Image";
+    string windowNameEroded3 = "Image Eroded with 3 x 3 Kernel.";
+    string windowNameEroded5 = "Image Eroded with 5 x 5 Kernel.";
+
+    cv::namedWindow(windowName, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameEroded3, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameEroded5, cv::WINDOW_NORMAL);
+
+    cv::imshow(windowName, image);
+    cv::imshow(windowNameEroded3, image_eroded3);
+    cv::imshow(windowNameEroded5, image_eroded5);
+
     // Here we wait for input then kill all of the window processes.
     cv::waitKey(0);
     cv::destroyAllWindows();

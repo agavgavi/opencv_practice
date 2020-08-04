@@ -16,6 +16,9 @@ public:
     int EditContrast(string src_url, int amount);
     int HistEqualization(string src_url, bool color);
     int Blur(string src_url, int amount);
+    int Blur3_5(string src_url);
+    int Erode(string src_url, int amount);
+    int Erode3_5(string src_url);
     int InvertImage(string src_url);
 };
 

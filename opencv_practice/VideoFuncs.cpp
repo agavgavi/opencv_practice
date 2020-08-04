@@ -18,14 +18,6 @@ int VideoFunctions::PlayVideo(string video_url, string windowName) {
         return -1;
     }
 
-    double fps = cap.get(cv::CAP_PROP_FPS); // Store the FPS of the video into a variable.
-    cout << "Frames Per Second of \'" << video_url << "\': " << fps << endl; // And then prints it out.
-
-    double width = cap.get(cv::CAP_PROP_FRAME_WIDTH); // Store width and height of video into variables.
-    double height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
-    cout << "Size of \'" << video_url << "\' wxh: " << width << " x " <<height << endl; // And then prints it out.
-
-
     cv::namedWindow(windowName, cv::WINDOW_NORMAL); // User can make the window larger now since we use WINDOW_NORMAL as a flag instead of WINDOW_AUTOSIZE
 
     while(true) { // Run infinitely to display video. When the video is ended or a user presses something the while loop will end.
@@ -157,13 +149,6 @@ int VideoFunctions::EditBrightness(string video_url, int amount) {
         return -1;
     }
 
-    double fps = cap.get(cv::CAP_PROP_FPS); // Store the FPS of the video into a variable.
-    cout << "Frames Per Second of \'" << video_url << "\': " << fps << endl; // And then prints it out.
-
-    double width = cap.get(cv::CAP_PROP_FRAME_WIDTH); // Store width and height of video into variables.
-    double height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
-    cout << "Size of \'" << video_url << "\' wxh: " << width << " x " <<height << endl; // And then prints it out.
-
     string windowNameOG = "Original Video";                                 // All of our new windows need names so we specify them to list how much the video was edited by.
     string windowNameHigh1 = "Brightness increased by " + to_string(amount);
     string windowNameHigh2 = "Brightness increased by " + to_string(2*amount);
@@ -219,13 +204,6 @@ int VideoFunctions::EditContrast(string video_url, int amount) {
         cerr << endl << "ERROR: Cannot open video file: \'" << video_url << "\'" << endl;
         return -1;
     }
-
-    double fps = cap.get(cv::CAP_PROP_FPS); // Store the FPS of the video into a variable.
-    cout << "Frames Per Second of \'" << video_url << "\': " << fps << endl; // And then prints it out.
-
-    double width = cap.get(cv::CAP_PROP_FRAME_WIDTH); // Store width and height of video into variables.
-    double height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
-    cout << "Size of \'" << video_url << "\' wxh: " << width << " x " <<height << endl; // And then prints it out.
 
     string windowNameOG = "Original Video";                                 // All of our new windows need names so we specify them to list how much the video was edited by.
     string windowNameHigh1 = "Contrast increased by x" + to_string(amount);
@@ -348,7 +326,6 @@ int VideoFunctions::Blur(string video_url, int amount) {
         cerr << endl << "ERROR: Cannot open video file: \'" << video_url << "\'" << endl;
         return -1;
     }
-
 
     string windowNameBluredHomogeneous = "Video Homogeneous Blured with " + to_string(amount) + " x " + to_string(amount) + " Kernel.";
     string windowNameBluredGaussian = "Video Gaussian Blured with " + to_string(amount) + " x " + to_string(amount) + " Kernel.";

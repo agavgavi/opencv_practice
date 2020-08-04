@@ -49,18 +49,18 @@ int image_funcs(ImageFunctions& img) {
         return -1;
     }
 
-    status = img.Blur("../images/mountains.jpg", 3); // Perform a Homogeneous Blur with 3 x 3 Kernel
+    status = img.Blur3_5("../images/mountains.jpg"); // Perform a Homogeneous and Gaussian Blur with 3 x 3 and 5x5 Kernel
 
     if(status == -1) {
         return -1;
     }
 
-    status = img.Blur("../images/mountains.jpg", 5); // Perform a Homogeneous Blur with 5 x 5 Kernel
+
+    status = img.Erode3_5("../images/mountains.jpg"); // Perform a 3x3 and 5x5 Erosion on an Image
 
     if(status == -1) {
         return -1;
     }
-
 
     status = img.InvertImage("../images/mountains.jpg"); // Perform am Image Inversion
 
