@@ -437,3 +437,72 @@ int ImageFunctions::Erode3_5(string src_url) {
 
     return 0;
 }
+
+//! This function will dilate an image a specific number of times based on the input variable
+int ImageFunctions::Dilate(string src_url, int amount) {
+
+
+    cv::Mat image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
+
+
+    if (image.empty()) {    // If anything goes wrong, the Mat image will be empty, so we can check for that and then spit out an error message.
+        cerr << endl << "ERROR: Could not locate/open image: \'" << src_url << "\'" << endl;
+        return -1; // Finally we return out of the Class to allow for the program to end.
+    }
+
+    cv::Mat image_dilated; // Create a Mat to store dilated image
+    cv::dilate(image, image_dilated, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(amount,amount)));
+
+    string windowName = "Original Image";
+    string windowNameDilated = "Image Dilated with " + to_string(amount) + " x " + to_string(amount) + " Kernel.";
+
+    cv::namedWindow(windowName, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameDilated, cv::WINDOW_NORMAL);
+
+    cv::imshow(windowName, image);
+    cv::imshow(windowNameDilated, image_dilated);
+
+    // Here we wait for input then kill all of the window processes.
+    cv::waitKey(0);
+    cv::destroyAllWindows();
+
+
+    return 0;
+}
+
+//! This function will erode an image based on a 3x3 and 5x5 kernel size.
+int ImageFunctions::Dilate3_5(string src_url) {
+
+
+    cv::Mat image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
+
+
+    if (image.empty()) {    // If anything goes wrong, the Mat image will be empty, so we can check for that and then spit out an error message.
+        cerr << endl << "ERROR: Could not locate/open image: \'" << src_url << "\'" << endl;
+        return -1; // Finally we return out of the Class to allow for the program to end.
+    }
+
+    cv::Mat image_dilated3; // Create a Mat to store dilated 3x3 image
+    cv::Mat image_dilated5; // Create a Mat to store dilated 5x5 image
+    cv::dilate(image, image_dilated3, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3,3))); // Perform an 3 x 3 dilation to the image.
+    cv::dilate(image, image_dilated5, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(5,5))); // Perform an 5 x 5 dilation to the image.
+
+    string windowName = "Original Image";
+    string windowNameDilated3 = "Image Dilated with 3 x 3 Kernel.";
+    string windowNameDilated5 = "Image Dilated with 5 x 5 Kernel.";
+
+    cv::namedWindow(windowName, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameDilated3, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameDilated5, cv::WINDOW_NORMAL);
+
+    cv::imshow(windowName, image);
+    cv::imshow(windowNameDilated3, image_dilated3);
+    cv::imshow(windowNameDilated5, image_dilated5);
+
+    // Here we wait for input then kill all of the window processes.
+    cv::waitKey(0);
+    cv::destroyAllWindows();
+
+
+    return 0;
+}

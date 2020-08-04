@@ -56,6 +56,12 @@ int image_funcs(ImageFunctions& img) {
         return -1;
     }
 
+    status = img.Dilate3_5("../images/mountains.jpg"); // Perform a 3x3 and 5x5 dilation
+
+    if(status == -1) {
+        return -1;
+    }
+
     status = img.InvertImage("../images/mountains.jpg"); // Perform am Image Inversion
 
     if(status == -1) {
