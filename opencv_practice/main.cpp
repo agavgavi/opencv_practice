@@ -43,12 +43,6 @@ int image_funcs(ImageFunctions& img) {
         return -1;
     }
 
-    status = img.HistEqualization("../images/mountains.jpg", false); // Perform a Histogram Equalization on the image in grayscale.
-
-    if(status == -1) {
-        return -1;
-    }
-
     status = img.Blur3_5("../images/mountains.jpg"); // Perform a Homogeneous and Gaussian Blur with 3 x 3 and 5x5 Kernel
 
     if(status == -1) {
@@ -98,19 +92,13 @@ int video_funcs(VideoFunctions& vid) {
         return -1;
     }
 
-    status = vid.HistEqualization("../videos/lights_vid.mov", false); // Perform a Histogram Equalization on the video in grayscale.
-
-    if(status == -1) {
-        return -1;
-    }
-
-    status = vid.Blur("../videos/lights_vid.mov", 3); // Perform a Homogeneous Blur with 3 x 3 Kernel
-
-    if(status == -1) {
-        return -1;
-    }
-
     status = vid.Blur("../videos/lights_vid.mov", 5); // Perform a Homogeneous Blur with 5 x 5 Kernel
+
+    if(status == -1) {
+        return -1;
+    }
+
+    status = vid.Erode("../videos/lights_vid.mov", 5); // Perform an Erode with 5 x 5 Kernel
 
     if(status == -1) {
         return -1;

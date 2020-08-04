@@ -15,6 +15,7 @@ public:
     int EditContrast(string video_url, int amount);
     int HistEqualization(string video_url, bool color);
     int Blur(string video_url, int amount);
+    int Erode(string video_url, int amount);
 };
 
 #endif // VIDEOFUNCTIONS_H

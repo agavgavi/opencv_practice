@@ -359,3 +359,43 @@ int VideoFunctions::Blur(string video_url, int amount) {
     cv::destroyAllWindows();  // After the key is pressed we destroy all video windows created
     return 0;
 }
+
+//! This function will apply a homogeneous and a gaussian blur to a video with a kernel size specified by amount.
+int VideoFunctions::Erode(string video_url, int amount) {
+
+    cv::VideoCapture cap(video_url); // Create a video capture object from the video url.
+
+    if(cap.isOpened() == false) { // Similar check to working with images (image.empty()), only difference is if there is an error, cap.isOpened will be false.
+        cerr << endl << "ERROR: Cannot open video file: \'" << video_url << "\'" << endl;
+        return -1;
+    }
+
+    string windowNameEroded = "Video Eroded with " + to_string(amount) + " x " + to_string(amount) + " Kernel.";
+
+    cv::namedWindow(windowNameEroded, cv::WINDOW_NORMAL);
+
+    while(true) { // Run infinitely to display video. When the video is ended or a user presses something the while loop will end.
+
+        cv::Mat frame; // Create a Mat to store a specific frame.
+        bool fSuccess = cap.read(frame); // Push the frame from the video capture device to frame. If it worked, fSuccess will be true.
+
+        if (fSuccess == false) { // When it is false, the video is over so the while loop can be broken out of.
+            cout << "Finished \'" << video_url << "\'" << endl;
+            break;
+        }
+
+        cv::Mat image_eroded; // Create a Mat to store eroded image
+
+        cv::erode(frame, image_eroded, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(amount,amount))); // Perform an amount x amount erosion to the image.
+
+        cv::imshow(windowNameEroded, image_eroded);
+
+        if(cv::waitKey(10) == 'q') { // Wait for the 'q' key for 10 ms. If that key isn't pressed or any other key is pressed, do nothing and continue to next iteration of the loop.
+                                    // If 'q' key is pressed, break out of the while loop and end the video.
+            cout << "Escape Key pressed. Closing \'" << video_url << "\'" << endl;
+            break;
+        }
+    }
+    cv::destroyAllWindows();  // After the key is pressed we destroy all video windows created
+    return 0;
+}
