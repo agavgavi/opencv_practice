@@ -7,8 +7,8 @@ VideoFunctions::VideoFunctions()
 }
 
 
-// This function will take in a URL for a video and the name of the window you want to display it in, open the video,
-// display the FPS, and then when the video is done or the user presses 'q' the video will close.
+//! This function will take in a URL for a video and the name of the window you want to display it in, open the video,
+//! display the FPS, and then when the video is done or the user presses 'q' the video will close.
 int VideoFunctions::PlayVideo(string video_url, string windowName) {
 
     cv::VideoCapture cap(video_url); // Create a video capture object from the video url.
@@ -92,7 +92,7 @@ int VideoFunctions::ShowCamera(int camera_device, string windowName) {
     return 0;
 }
 
-// A function that will save the recording of the camera until the user presses the 'q' key
+//! A function that will save the recording of the camera until the user presses the 'q' key
 int VideoFunctions::SaveVideo(int camera_device, string dest_url) {
 
     cv::VideoCapture cap(camera_device); // Create a video capture object from the camera int.
@@ -148,7 +148,7 @@ int VideoFunctions::SaveVideo(int camera_device, string dest_url) {
     return 0;
 }
 
-// Edit brightness on a saved video by a specified amount. Similar to ImageFunctions::EditBrightness except with video.
+//! Edit brightness on a saved video by a specified amount. Similar to ImageFunctions::EditBrightness except with video.
 int VideoFunctions::EditBrightness(string video_url, int amount) {
     cv::VideoCapture cap(video_url); // Create a video capture object from the video url.
 
@@ -211,7 +211,7 @@ int VideoFunctions::EditBrightness(string video_url, int amount) {
     return 0;
 }
 
-// Edit contrast on a saved video by a specified amount. Similar to ImageFunctions::EditContrast except with video.
+//! Edit contrast on a saved video by a specified amount. Similar to ImageFunctions::EditContrast except with video.
 int VideoFunctions::EditContrast(string video_url, int amount) {
     cv::VideoCapture cap(video_url); // Create a video capture object from the video url.
 
@@ -274,7 +274,7 @@ int VideoFunctions::EditContrast(string video_url, int amount) {
     return 0;
 }
 
-// This function will equalize the intensity of the video, making it the same across the board. It can output both a grayscale equalization and a color equalization based on the value of the color bool.
+//! This function will equalize the intensity of the video, making it the same across the board. It can output both a grayscale equalization and a color equalization based on the value of the color bool.
 int VideoFunctions::HistEqualization(string video_url, bool color) {
 
     cv::VideoCapture cap(video_url); // Create a video capture object from the video url.
@@ -341,7 +341,7 @@ int VideoFunctions::HistEqualization(string video_url, bool color) {
     return 0;
 }
 
-// This function will apply a homogeneous blur to a video with a kernel size specified by amount.
+//! This function will apply a homogeneous blur to a video with a kernel size specified by amount.
 int VideoFunctions::BlurHomogeneous(string video_url, int amount) {
 
     cv::VideoCapture cap(video_url); // Create a video capture object from the video url.

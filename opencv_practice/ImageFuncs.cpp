@@ -5,7 +5,7 @@ ImageFunctions::ImageFunctions()
 {
 }
 
-// A function to load a specific image passed in on object creation.
+//! A function to load a specific image passed in on object creation.
 int ImageFunctions::LoadImage(string image_name, string windowName) {
     cv::Mat image = cv::imread(image_name); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
                                             /* imread has some flags we can do:
@@ -34,7 +34,7 @@ int ImageFunctions::LoadImage(string image_name, string windowName) {
     return 0;
 }
 
-// A function that will create a blank image of the same color as the 3 elements passed into it.
+//! A function that will create a blank image of the same color as the 3 elements passed into it.
 int ImageFunctions::CreateImage(string windowName, int blue, int green, int red) {
 
     cv::Mat image(600,800, CV_8UC3, cv::Scalar(blue,green,red)); // Create a material instead of from an image or video on disk but through the constructor. There are many options for parameters.
@@ -60,7 +60,7 @@ int ImageFunctions::CreateImage(string windowName, int blue, int green, int red)
     return 0;
 }
 
-// A function that will do a direct copy of an image. Pass it the url of the image and it will save a copy
+//! A function that will do a direct copy of an image. Pass it the url of the image and it will save a copy
 int ImageFunctions::CopyImage(string src_url, string dest_url) {
 
     cv::Mat original_image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
@@ -97,7 +97,7 @@ int ImageFunctions::CopyImage(string src_url, string dest_url) {
     return 0;
 }
 
-// Adjust the brightness up and down in steps of two from the inputted int. So if amount = 20, increase brightness by 20, 40, then decrease by -20, -40
+//! Adjust the brightness up and down in steps of two from the inputted int. So if amount = 20, increase brightness by 20, 40, then decrease by -20, -40
 int ImageFunctions::EditBrightness(string src_url, int amount) {
 
     cv::Mat image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
@@ -152,7 +152,7 @@ int ImageFunctions::EditBrightness(string src_url, int amount) {
     return 0;
 }
 
-// Adjust the contrast up and down in steps of two from the inputted int. So if amount = 2, increase brightness by 2, 4, then decrease by 1/2, 1/4
+//! Adjust the contrast up and down in steps of two from the inputted int. So if amount = 2, increase brightness by 2, 4, then decrease by 1/2, 1/4
 int ImageFunctions::EditContrast(string src_url, int amount) {
 
     cv::Mat image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
@@ -207,7 +207,7 @@ int ImageFunctions::EditContrast(string src_url, int amount) {
     return 0;
 }
 
-// This function will equalize the intensity of the image, making it the same across the board. It can output both a grayscale equalization and a color equalization based on the value of the color bool.
+//! This function will equalize the intensity of the image, making it the same across the board. It can output both a grayscale equalization and a color equalization based on the value of the color bool.
 int ImageFunctions::HistEqualization(string src_url, bool color) {
 
     cv::Mat image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
@@ -258,7 +258,9 @@ int ImageFunctions::HistEqualization(string src_url, bool color) {
     return 0;
 }
 
+//! This function will apply a homogeneous blur to a video with a kernel size specified by amount.
 int ImageFunctions::BlurHomogeneous(string src_url, int amount) {
+
 
     cv::Mat image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
 
