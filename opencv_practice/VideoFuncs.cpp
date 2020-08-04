@@ -274,7 +274,7 @@ int VideoFunctions::EditContrast(string video_url, int amount) {
     return 0;
 }
 
-// This function will equalize the intensity of the image, making it the same across the board. It can output both a grayscale equalization and a color equalization based on the value of the color bool.
+// This function will equalize the intensity of the video, making it the same across the board. It can output both a grayscale equalization and a color equalization based on the value of the color bool.
 int VideoFunctions::HistEqualization(string video_url, bool color) {
 
     cv::VideoCapture cap(video_url); // Create a video capture object from the video url.
