@@ -258,7 +258,7 @@ int ImageFunctions::HistEqualization(string src_url, bool color) {
     return 0;
 }
 
-//! This function will apply a homogeneous blur to a video with a kernel size specified by amount.
+//! This function will apply a homogeneous blur to an image with a kernel size specified by amount.
 int ImageFunctions::BlurHomogeneous(string src_url, int amount) {
 
 
