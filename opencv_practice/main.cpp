@@ -37,6 +37,18 @@ int image_funcs(ImageFunctions& img) {
         return -1;
     }
 
+    status = img.HistEqualization("../images/mountains.jpg", true); // Perform a Histogram Equalization on the image in color.
+
+    if(status == -1) {
+        return -1;
+    }
+
+    status = img.HistEqualization("../images/mountains.jpg", false); // Perform a Histogram Equalization on the image in grayscale.
+
+    if(status == -1) {
+        return -1;
+    }
+
     return 0;
 }
 

@@ -148,6 +148,8 @@ int ImageFunctions::EditBrightness(string src_url, int amount) {
     // Here we wait for input then kill all of the window processes.
     cv::waitKey(0);
     cv::destroyAllWindows();
+
+    return 0;
 }
 
 // Adjust the contrast up and down in steps of two from the inputted int. So if amount = 2, increase brightness by 2, 4, then decrease by 1/2, 1/4
@@ -201,4 +203,54 @@ int ImageFunctions::EditContrast(string src_url, int amount) {
     // Here we wait for input then kill all of the window processes.
     cv::waitKey(0);
     cv::destroyAllWindows();
+
+    return 0;
+}
+
+// This function will equalize the intensity of the image, making it the same across the board. It can output both a grayscale equalization and a color equalization based on the value of the color bool.
+int ImageFunctions::HistEqualization(string src_url, bool color) {
+
+    cv::Mat image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
+
+
+    if (image.empty()) {    // If anything goes wrong, the Mat image will be empty, so we can check for that and then spit out an error message.
+        cerr << endl << "ERROR: Could not locate/open image: \'" << src_url << "\'" << endl;
+        return -1; // Finally we return out of the Class to allow for the program to end.
+    }
+
+    string grayscale = "";
+    if (color == false) { // If we don't want color, make it grayscale
+        cv::cvtColor(image, image, cv::COLOR_BGR2GRAY);
+        grayscale = " (Grayscale)";
+    }
+
+
+    cv::Mat hist_equalized_image; // Declare a Mat that will store the output image
+
+    if (color == true) { // We need to do more work if dealing with a color image
+        cv::cvtColor(image, hist_equalized_image, cv::COLOR_BGR2YCrCb); // We can't equalize all 3 channels seperately since that would mess with color information and change the color of the BGR image.
+                                                                        // Because of this we convert to YCrCb, where Y is the only channel with intensity information, so that channel can be equalized.
+        vector<cv::Mat> vec_channels;   // We are going to need to store the 3 channels somewhere, so we make a vector of Mats.
+        cv::split(hist_equalized_image, vec_channels); // We will split the image and put each channel into a different Mat in the vector.
+        cv::equalizeHist(vec_channels[0], vec_channels[0]); // We need to equalize only the Y channel.
+        cv::merge(vec_channels, hist_equalized_image); // Once Equalized, we can merge the layers back together to make one Mat.
+        cv::cvtColor(hist_equalized_image, hist_equalized_image, cv::COLOR_YCrCb2BGR); // Then we can convert the Mat back to BGR from YCrCb.
+    }
+    else {
+        cv::equalizeHist(image, hist_equalized_image); // If we are just using grayscale, there is only 1 channel so we don't need to do any extra conversion/splitting/merging.
+    }
+
+    string windowNameOG = "Original Image" + grayscale;                                 // All of our new windows need names so we specify them to list how much the image was edited by.
+    string windowNameHist = "Histogram Equalized Image";
+
+    cv::namedWindow(windowNameOG, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameHist, cv::WINDOW_NORMAL);
+
+    cv::imshow(windowNameOG, image);
+    cv::imshow(windowNameHist, hist_equalized_image);
+    // Here we wait for input then kill all of the window processes.
+    cv::waitKey(0);
+    cv::destroyAllWindows();
+
+    return 0;
 }

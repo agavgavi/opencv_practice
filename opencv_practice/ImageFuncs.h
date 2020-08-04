@@ -14,6 +14,7 @@ public:
     int CopyImage(string src_url, string dest_url);
     int EditBrightness(string src_url, int amount);
     int EditContrast(string src_url, int amount);
+    int HistEqualization(string src_url, bool color);
 };
 
 #endif // IMAGEFUNCS_H
