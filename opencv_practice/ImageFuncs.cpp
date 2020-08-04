@@ -232,8 +232,11 @@ int ImageFunctions::HistEqualization(string src_url, bool color) {
                                                                         // Because of this we convert to YCrCb, where Y is the only channel with intensity information, so that channel can be equalized.
         vector<cv::Mat> vec_channels;   // We are going to need to store the 3 channels somewhere, so we make a vector of Mats.
         cv::split(hist_equalized_image, vec_channels); // We will split the image and put each channel into a different Mat in the vector.
+
         cv::equalizeHist(vec_channels[0], vec_channels[0]); // We need to equalize only the Y channel.
+
         cv::merge(vec_channels, hist_equalized_image); // Once Equalized, we can merge the layers back together to make one Mat.
+
         cv::cvtColor(hist_equalized_image, hist_equalized_image, cv::COLOR_YCrCb2BGR); // Then we can convert the Mat back to BGR from YCrCb.
     }
     else {

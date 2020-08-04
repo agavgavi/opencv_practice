@@ -62,6 +62,30 @@ int video_funcs(VideoFunctions& vid) {
         return -1;
     }
 
+    status = vid.EditBrightness("../videos/lights_vid.mov", 50); // Adjust brightness of video by +- 50 and +-100
+
+    if(status == -1) {
+        return -1;
+    }
+
+    status = vid.EditContrast("../videos/lights_vid.mov", 2); // Adjust contrast by 2, 4, 1/2, and 1/4
+
+    if(status == -1) {
+        return -1;
+    }
+
+    status = vid.HistEqualization("../videos/lights_vid.mov", true); // Perform a Histogram Equalization on the video in color.
+
+    if(status == -1) {
+        return -1;
+    }
+
+    status = vid.HistEqualization("../videos/lights_vid.mov", false); // Perform a Histogram Equalization on the video in grayscale.
+
+    if(status == -1) {
+        return -1;
+    }
+
     status = vid.ShowCamera(0, "Display Webcam");   // Display webcam capture.
 
     if(status == -1) {
@@ -74,17 +98,7 @@ int video_funcs(VideoFunctions& vid) {
 //        return -1;
 //    }
 
-    status = vid.EditBrightness("../videos/lights_vid.mov", 50); // Adjust brightness of video by +- 50 and +-100
 
-    if(status == -1) {
-        return -1;
-    }
-
-    status = vid.EditContrast("../videos/lights_vid.mov", 2); // Adjust contrast by 2, 4, 1/2, and 1/4
-
-    if(status == -1) {
-        return -1;
-    }
 
     return 0;
 }

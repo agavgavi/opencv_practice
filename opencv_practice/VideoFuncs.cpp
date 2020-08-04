@@ -273,3 +273,70 @@ int VideoFunctions::EditContrast(string video_url, int amount) {
     cv::destroyAllWindows();  // After the key is pressed we destroy all video windows created
     return 0;
 }
+
+// This function will equalize the intensity of the image, making it the same across the board. It can output both a grayscale equalization and a color equalization based on the value of the color bool.
+int VideoFunctions::HistEqualization(string video_url, bool color) {
+
+    cv::VideoCapture cap(video_url); // Create a video capture object from the video url.
+
+    if(cap.isOpened() == false) { // Similar check to working with images (image.empty()), only difference is if there is an error, cap.isOpened will be false.
+        cerr << endl << "ERROR: Cannot open video file: \'" << video_url << "\'" << endl;
+        return -1;
+    }
+    string grayscale = color ? "" : " (Grayscale)";
+
+    string windowNameOG = "Original Image" + grayscale;                                 // All of our new windows need names so we specify them to list how much the image was edited by.
+    string windowNameHist = "Histogram Equalized Image";
+
+    cv::namedWindow(windowNameOG, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameHist, cv::WINDOW_NORMAL);
+
+    while(true) { // Run infinitely to display video. When the video is ended or a user presses something the while loop will end.
+
+        cv::Mat frame; // Create a Mat to store a specific frame.
+        bool fSuccess = cap.read(frame); // Push the frame from the video capture device to frame. If it worked, fSuccess will be true.
+
+        if (fSuccess == false) { // When it is false, the video is over so the while loop can be broken out of.
+            cout << "Finished \'" << video_url << "\'" << endl;
+            break;
+        }
+
+        if (color == false) { // If we don't want color, make it grayscale
+            cv::cvtColor(frame, frame, cv::COLOR_BGR2GRAY);
+            grayscale = " (Grayscale)";
+        }
+
+
+        cv::Mat hist_equalized_image; // Declare a Mat that will store the output image
+
+        if (color == true) { // We need to do more work if dealing with a color image
+            cv::cvtColor(frame, hist_equalized_image, cv::COLOR_BGR2YCrCb); // We can't equalize all 3 channels seperately since that would mess with color information and change the color of the BGR image.
+                                                                            // Because of this we convert to YCrCb, where Y is the only channel with intensity information, so that channel can be equalized.
+
+            vector<cv::Mat> vec_channels;   // We are going to need to store the 3 channels somewhere, so we make a vector of Mats.
+            cv::split(hist_equalized_image, vec_channels); // We will split the image and put each channel into a different Mat in the vector.
+
+            cv::equalizeHist(vec_channels[0], vec_channels[0]); // We need to equalize only the Y channel.
+
+            cv::merge(vec_channels, hist_equalized_image); // Once Equalized, we can merge the layers back together to make one Mat.
+
+            cv::cvtColor(hist_equalized_image, hist_equalized_image, cv::COLOR_YCrCb2BGR); // Then we can convert the Mat back to BGR from YCrCb.
+        }
+        else {
+            cv::equalizeHist(frame, hist_equalized_image); // If we are just using grayscale, there is only 1 channel so we don't need to do any extra conversion/splitting/merging.
+        }
+
+        cv::imshow(windowNameOG, frame);
+        cv::imshow(windowNameHist, hist_equalized_image);
+
+        if(cv::waitKey(10) == 'q') { // Wait for the 'q' key for 10 ms. If that key isn't pressed or any other key is pressed, do nothing and continue to next iteration of the loop.
+                                    // If 'q' key is pressed, break out of the while loop and end the video.
+            cout << "Escape Key pressed. Closing \'" << video_url << "\'" << endl;
+            break;
+        }
+    }
+    cv::destroyAllWindows();  // After the key is pressed we destroy all video windows created
+    return 0;
+
+    return 0;
+}
