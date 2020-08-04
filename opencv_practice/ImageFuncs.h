@@ -17,6 +17,7 @@ public:
     int HistEqualization(string src_url, bool color);
     int BlurHomogeneous(string src_url, int amount);
     int BlurGaussian(string src_url, int amount);
+    int InvertImage(string src_url);
 };
 
 #endif // IMAGEFUNCS_H

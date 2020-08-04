@@ -72,6 +72,13 @@ int image_funcs(ImageFunctions& img) {
     if(status == -1) {
         return -1;
     }
+
+
+    status = img.InvertImage("../images/mountains.jpg"); // Perform am Image Inversion
+
+    if(status == -1) {
+        return -1;
+    }
     return 0;
 }
 
