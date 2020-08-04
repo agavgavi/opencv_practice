@@ -340,3 +340,48 @@ int VideoFunctions::HistEqualization(string video_url, bool color) {
 
     return 0;
 }
+
+// This function will apply a homogeneous blur to a video with a kernel size specified by amount.
+int VideoFunctions::BlurHomogeneous(string video_url, int amount) {
+
+    cv::VideoCapture cap(video_url); // Create a video capture object from the video url.
+
+    if(cap.isOpened() == false) { // Similar check to working with images (image.empty()), only difference is if there is an error, cap.isOpened will be false.
+        cerr << endl << "ERROR: Cannot open video file: \'" << video_url << "\'" << endl;
+        return -1;
+    }
+
+
+    string windowName = "Original Image";
+    string windowNameBlured = "Image Blured with " + to_string(amount) + " x " + to_string(amount) + " Kernel.";
+
+    cv::namedWindow(windowName, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameBlured, cv::WINDOW_NORMAL);
+
+    while(true) { // Run infinitely to display video. When the video is ended or a user presses something the while loop will end.
+
+        cv::Mat frame; // Create a Mat to store a specific frame.
+        bool fSuccess = cap.read(frame); // Push the frame from the video capture device to frame. If it worked, fSuccess will be true.
+
+        if (fSuccess == false) { // When it is false, the video is over so the while loop can be broken out of.
+            cout << "Finished \'" << video_url << "\'" << endl;
+            break;
+        }
+
+        cv::Mat image_blured; // Create a Mat to store blurred image
+        cv::blur(frame, image_blured, cv::Size(amount,amount)); // Perform a homogeneous blur across the whole image of a amount x amount kernel.
+
+        cv::imshow(windowName, frame);
+        cv::imshow(windowNameBlured, image_blured);
+
+        if(cv::waitKey(10) == 'q') { // Wait for the 'q' key for 10 ms. If that key isn't pressed or any other key is pressed, do nothing and continue to next iteration of the loop.
+                                    // If 'q' key is pressed, break out of the while loop and end the video.
+            cout << "Escape Key pressed. Closing \'" << video_url << "\'" << endl;
+            break;
+        }
+    }
+    cv::destroyAllWindows();  // After the key is pressed we destroy all video windows created
+    return 0;
+
+    return 0;
+}

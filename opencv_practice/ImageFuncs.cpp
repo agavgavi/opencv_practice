@@ -268,8 +268,8 @@ int ImageFunctions::BlurHomogeneous(string src_url, int amount) {
         return -1; // Finally we return out of the Class to allow for the program to end.
     }
 
-    cv::Mat image_blured;
-    cv::blur(image, image_blured, cv::Size(amount,amount));
+    cv::Mat image_blured; // Create a Mat to store blurred image
+    cv::blur(image, image_blured, cv::Size(amount,amount)); // Perform a homogeneous blur across the whole image of a amount x amount kernel.
 
     string windowName = "Original Image";
     string windowNameBlured = "Image Blured with " + to_string(amount) + " x " + to_string(amount) + " Kernel.";

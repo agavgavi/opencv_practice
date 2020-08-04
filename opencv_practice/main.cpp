@@ -97,6 +97,18 @@ int video_funcs(VideoFunctions& vid) {
         return -1;
     }
 
+    status = vid.BlurHomogeneous("../videos/lights_vid.mov", 3); // Perform a Homogeneous Blur with 3 x 3 Kernel
+
+    if(status == -1) {
+        return -1;
+    }
+
+    status = vid.BlurHomogeneous("../videos/lights_vid.mov", 5); // Perform a Homogeneous Blur with 5 x 5 Kernel
+
+    if(status == -1) {
+        return -1;
+    }
+
     status = vid.ShowCamera(0, "Display Webcam");   // Display webcam capture.
 
     if(status == -1) {
