@@ -15,8 +15,7 @@ public:
     int EditBrightness(string src_url, int amount);
     int EditContrast(string src_url, int amount);
     int HistEqualization(string src_url, bool color);
-    int BlurHomogeneous(string src_url, int amount);
-    int BlurGaussian(string src_url, int amount);
+    int Blur(string src_url, int amount);
     int InvertImage(string src_url);
 };
 
