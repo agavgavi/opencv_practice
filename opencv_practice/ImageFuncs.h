@@ -16,6 +16,7 @@ public:
     int EditContrast(string src_url, int amount);
     int HistEqualization(string src_url, bool color);
     int BlurHomogeneous(string src_url, int amount);
+    int BlurGaussian(string src_url, int amount);
 };
 
 #endif // IMAGEFUNCS_H

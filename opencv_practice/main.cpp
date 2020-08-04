@@ -60,6 +60,18 @@ int image_funcs(ImageFunctions& img) {
     if(status == -1) {
         return -1;
     }
+
+    status = img.BlurGaussian("../images/mountains.jpg", 3); // Perform a Gaussian Blur with 3 x 3 Kernel
+
+    if(status == -1) {
+        return -1;
+    }
+
+    status = img.BlurGaussian("../images/mountains.jpg", 5); // Perform a Gaussian Blur with 5 x 5 Kernel
+
+    if(status == -1) {
+        return -1;
+    }
     return 0;
 }
 
@@ -104,6 +116,18 @@ int video_funcs(VideoFunctions& vid) {
     }
 
     status = vid.BlurHomogeneous("../videos/lights_vid.mov", 5); // Perform a Homogeneous Blur with 5 x 5 Kernel
+
+    if(status == -1) {
+        return -1;
+    }
+
+    status = vid.BlurGaussian("../videos/lights_vid.mov", 3); // Perform a Gaussian Blur with 3 x 3 Kernel
+
+    if(status == -1) {
+        return -1;
+    }
+
+    status = vid.BlurGaussian("../videos/lights_vid.mov", 5); // Perform a Gaussian Blur with 5 x 5 Kernel
 
     if(status == -1) {
         return -1;

@@ -288,3 +288,34 @@ int ImageFunctions::BlurHomogeneous(string src_url, int amount) {
 
     return 0;
 }
+
+//! This function will apply a Gaussian blur to an image with a kernel size specified by amount.
+int ImageFunctions::BlurGaussian(string src_url, int amount) {
+
+
+    cv::Mat image = cv::imread(src_url); // Read an image from the location provided and store it in a Mat called image. (OPENCV DOES BGR NOT RGB for channels)
+
+
+    if (image.empty()) {    // If anything goes wrong, the Mat image will be empty, so we can check for that and then spit out an error message.
+        cerr << endl << "ERROR: Could not locate/open image: \'" << src_url << "\'" << endl;
+        return -1; // Finally we return out of the Class to allow for the program to end.
+    }
+
+    cv::Mat image_blured; // Create a Mat to store blurred image
+    cv::GaussianBlur(image, image_blured, cv::Size(amount,amount),0); // Perform a gaussian blur across the whole image of a amount x amount kernel.
+
+    string windowName = "Original Image";
+    string windowNameBlured = "Image Blured with " + to_string(amount) + " x " + to_string(amount) + " Kernel.";
+
+    cv::namedWindow(windowName, cv::WINDOW_NORMAL);
+    cv::namedWindow(windowNameBlured, cv::WINDOW_NORMAL);
+
+    cv::imshow(windowName, image);
+    cv::imshow(windowNameBlured, image_blured);
+    // Here we wait for input then kill all of the window processes.
+    cv::waitKey(0);
+    cv::destroyAllWindows();
+
+
+    return 0;
+}
