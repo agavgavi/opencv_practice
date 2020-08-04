@@ -22,6 +22,7 @@ public:
     int Dilate(string src_url, int amount);
     int Dilate3_5(string src_url);
     int InvertImage(string src_url);
+    int TrackbarEdit(string src_url);
 };
 
 #endif // IMAGEFUNCS_H

@@ -67,6 +67,7 @@ int image_funcs(ImageFunctions& img) {
     if(status == -1) {
         return -1;
     }
+    status = img.TrackbarEdit("../images/mountains.jpg");
     return 0;
 }
 
