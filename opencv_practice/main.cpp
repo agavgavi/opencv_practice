@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ImageFuncs.h"
 #include "VideoFuncs.h"
+#include "ImageEditer.h"
 
 #include <QApplication>
 
@@ -131,25 +132,29 @@ int video_funcs(VideoFunctions& vid) {
 int main(/*int argc, char *argv[]*/)
 {
 
+    ImageEditer editor;
     ImageFunctions img; // Class for all Image tutorials
     VideoFunctions vid; // Class for all Video Tutorials
     int status = 0;
 
-    status = image_funcs(img); // Do all image functions
 
-    if(status == -1) {
-        return -1;
-    }
+    editor.newEditor("../images/mountains.jpg", "../images/new_mountains.jpg");
 
-    cout << endl << "Finished Image Manipulation Functions" << endl << endl;
+//    status = image_funcs(img); // Do all image functions
 
-    status = video_funcs(vid); // do all video functions
+//    if(status == -1) {
+//        return -1;
+//    }
 
-    if(status == -1) {
-        return -1;
-    }
+//    cout << endl << "Finished Image Manipulation Functions" << endl << endl;
 
-    cout << endl << "Finished Video Manipulation Functions" << endl << endl;
+//    status = video_funcs(vid); // do all video functions
+
+//    if(status == -1) {
+//        return -1;
+//    }
+
+//    cout << endl << "Finished Video Manipulation Functions" << endl << endl;
 
     return 0;
 
