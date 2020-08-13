@@ -64,6 +64,7 @@ void MainWindow::on_savePushButton_pressed()
         cv::GaussianBlur(inpImage, outImage,
                          cv::Size(5, 5), 1.25);
     }
+
     outImage.convertTo(outImage, -1, Contrast, Brightness);
     cv::imwrite(outputName.toStdString(), outImage);
 
@@ -96,6 +97,10 @@ void MainWindow::loadSettings()
     ui->medianBlurRadioButton->setChecked(settings.value("medianBlurRadioButton", true).toBool());
     ui->gaussianBlurRadioButton->setChecked(settings.value("gaussianBlurRadioButton", false).toBool());
     ui->displayImageCheckBox->setChecked(settings.value("displayImageCheckBox", false).toBool());
+    ui->brightnessHorizontalSlider->setValue(settings.value("brightnessHorizontalSlider", 50).toInt());
+    ui->contrastHorizontalSlider->setValue(settings.value("contrastHorizontalSlider", 50).toInt());
+    ui->brightnessLabel->setText(settings.value("brightnessLabel", "Brightness (50) : ").toString());
+    ui->contrastLabel->setText(settings.value("contrastLabel", "Contrast (50) : ").toString());
 }
 
 void MainWindow::saveSettings()
@@ -107,16 +112,20 @@ void MainWindow::saveSettings()
     settings.setValue("medianBlurRadioButton", ui->medianBlurRadioButton->isChecked());
     settings.setValue("gaussianBlurRadioButton", ui->gaussianBlurRadioButton->isChecked());
     settings.setValue("displayImageCheckBox", ui->displayImageCheckBox->isChecked());
+    settings.setValue("brightnessHorizontalSlider", ui->brightnessHorizontalSlider->value());
+    settings.setValue("contrastHorizontalSlider", ui->contrastHorizontalSlider->value());
+    settings.setValue("brightnessLabel", ui->brightnessLabel->text());
+    settings.setValue("contrastLabel", ui->contrastLabel->text());
 }
 
 void MainWindow::on_brightnessHorizontalSlider_sliderMoved(int position)
 {
-   QString brightnessVal = QString("Brightness (%1): ").arg(position);
+   QString brightnessVal = QString("Brightness (%1) : ").arg(position);
     ui->brightnessLabel->setText(brightnessVal);
 }
 
 void MainWindow::on_contrastHorizontalSlider_sliderMoved(int position)
 {
-    QString contrastVal = QString("Contrast (%1): ").arg(position);
+    QString contrastVal = QString("Contrast (%1) : ").arg(position);
      ui->contrastLabel->setText(contrastVal);
 }
