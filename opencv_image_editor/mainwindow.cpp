@@ -46,16 +46,21 @@ void MainWindow::on_savePushButton_pressed()
 {
     QString inputName = ui->inputLineEdit->text();
     QString outputName = ui->outputLineEdit->text();
-    using namespace cv;
-    Mat inpImage, outImage;
-    inpImage = imread(inputName.toStdString());
+
+    cv::Mat inpImage, outImage;
+
+    inpImage = cv::imread(inputName.toStdString());
+
     if(ui->medianBlurRadioButton->isChecked())
         cv::medianBlur(inpImage, outImage, 5);
+
     else if(ui->gaussianBlurRadioButton->isChecked())
-        cv::GaussianBlur(inpImage, outImage, Size(5, 5), 1.25);
-    imwrite(outputName.toStdString(), outImage);
+        cv::GaussianBlur(inpImage, outImage, cv::Size(5, 5), 1.25);
+
+    cv::imwrite(outputName.toStdString(), outImage);
+
     if(ui->displayImageCheckBox->isChecked())
-        imshow("Output Image", outImage);
+        cv::imshow("Output Image", outImage);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
@@ -73,7 +78,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
 void MainWindow::loadSettings()
 {
-    QSettings settings("Packt", "Hello_OpenCV_Qt", this);
+    QSettings settings("agavgavi", "opencv_image_editor", this);
 
     ui->inputLineEdit->setText(settings.value("inputLineEdit", "").toString());
     ui->outputLineEdit->setText(settings.value("outputLineEdit", "").toString());
@@ -84,7 +89,7 @@ void MainWindow::loadSettings()
 
 void MainWindow::saveSettings()
 {
-    QSettings settings("Packt", "Hello_OpenCV_Qt", this);
+    QSettings settings("agavgavi", "opencv_image_editor", this);
 
     settings.setValue("inputLineEdit", ui->inputLineEdit->text());
     settings.setValue("outputLineEdit", ui->outputLineEdit->text());
