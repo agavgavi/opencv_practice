@@ -46,25 +46,36 @@ void MainWindow::on_savePushButton_pressed()
 {
     QString inputName = ui->inputLineEdit->text();
     QString outputName = ui->outputLineEdit->text();
+    int SliderVal1 = ui->brightnessHorizontalSlider->value();
+    int SliderVal2 = ui->contrastHorizontalSlider->value();
+
+    int Brightness = SliderVal1 - 50;
+    double Contrast = SliderVal2 / 50.0;
 
     cv::Mat inpImage, outImage;
 
     inpImage = cv::imread(inputName.toStdString());
 
-    if(ui->medianBlurRadioButton->isChecked())
+    if(ui->medianBlurRadioButton->isChecked()) {
         cv::medianBlur(inpImage, outImage, 5);
+    }
 
-    else if(ui->gaussianBlurRadioButton->isChecked())
-        cv::GaussianBlur(inpImage, outImage, cv::Size(5, 5), 1.25);
-
+    else if(ui->gaussianBlurRadioButton->isChecked()) {
+        cv::GaussianBlur(inpImage, outImage,
+                         cv::Size(5, 5), 1.25);
+    }
+    outImage.convertTo(outImage, -1, Contrast, Brightness);
     cv::imwrite(outputName.toStdString(), outImage);
 
-    if(ui->displayImageCheckBox->isChecked())
+    if(ui->displayImageCheckBox->isChecked()) {
         cv::imshow("Output Image", outImage);
+    }
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
-    int result = QMessageBox::warning(this,"Exit","Are you sure you want to close this program?",QMessageBox::Yes,QMessageBox::No);
+    int result = QMessageBox::warning(this, "Exit",
+                                      "Are you sure you want to close this program?",
+                                      QMessageBox::Yes, QMessageBox::No);
 
     if(result == QMessageBox::Yes) {
         saveSettings();
@@ -96,4 +107,16 @@ void MainWindow::saveSettings()
     settings.setValue("medianBlurRadioButton", ui->medianBlurRadioButton->isChecked());
     settings.setValue("gaussianBlurRadioButton", ui->gaussianBlurRadioButton->isChecked());
     settings.setValue("displayImageCheckBox", ui->displayImageCheckBox->isChecked());
+}
+
+void MainWindow::on_brightnessHorizontalSlider_sliderMoved(int position)
+{
+   QString brightnessVal = QString("Brightness (%1): ").arg(position);
+    ui->brightnessLabel->setText(brightnessVal);
+}
+
+void MainWindow::on_contrastHorizontalSlider_sliderMoved(int position)
+{
+    QString contrastVal = QString("Contrast (%1): ").arg(position);
+     ui->contrastLabel->setText(contrastVal);
 }

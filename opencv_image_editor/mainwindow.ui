@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>467</width>
-    <height>184</height>
+    <width>686</width>
+    <height>278</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Blur Editor</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -79,6 +79,57 @@
        </widget>
       </item>
      </layout>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="editorGroupBox">
+      <property name="title">
+       <string>Brightness/Contrast Editor</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="brightnessHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="brightnessLabel">
+           <property name="text">
+            <string>Brightness (50) :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="brightnessHorizontalSlider">
+           <property name="value">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="contrastHorizontalLayout">
+         <item>
+          <widget class="QLabel" name="contrastLabel">
+           <property name="text">
+            <string>Contrast (50) :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="contrastHorizontalSlider">
+           <property name="value">
+            <number>50</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="saveHorizontalLayout">

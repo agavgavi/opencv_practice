@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <iostream>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,6 +22,10 @@ private slots:
     void on_outputPushButton_pressed();
 
     void on_savePushButton_pressed();
+
+    void on_brightnessHorizontalSlider_sliderMoved(int position);
+
+    void on_contrastHorizontalSlider_sliderMoved(int position);
 
 private:
     Ui::MainWindow *ui;
