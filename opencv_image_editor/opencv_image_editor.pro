@@ -18,10 +18,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    opencveditor.cpp \
     videoprocessor.cpp
 
 HEADERS += \
     mainwindow.h \
+    opencveditor.h \
     videoprocessor.h
 
 FORMS += \

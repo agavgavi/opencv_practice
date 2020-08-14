@@ -8,7 +8,7 @@
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
-
+#include "opencveditor.h"
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -33,6 +33,9 @@ private:
     void loadSettings();
     void saveSettings();
     VideoProcessor *processor;
+    OpenCVEditor editor;
+    QString inputFileName;
+    QString outputFileName;
 
 protected:
     void closeEvent(QCloseEvent *event);

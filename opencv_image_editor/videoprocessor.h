@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QPixmap>
 #include <opencv4/opencv2/opencv.hpp>
+#include "opencveditor.h"
+
 
 class VideoProcessor : public QObject
 {
@@ -21,5 +23,6 @@ public slots:
 private:
     bool stopped;
 };
+
 
 #endif // VIDEOPROCESSOR_H

@@ -22,24 +22,24 @@ MainWindow::MainWindow(QWidget *parent)
     processor->moveToThread(new QThread(this));
 
     connect(processor->thread(),
-        SIGNAL(started()),
+        &QThread::started,
         processor,
-        SLOT(startVideo()));
+        &VideoProcessor::startVideo);
 
     connect(processor->thread(),
-        SIGNAL(finished()),
+        &QThread::finished,
         processor,
-        SLOT(deleteLater()));
+        &QThread::deleteLater);
 
     connect(processor,
-        SIGNAL(inDisplay(QPixmap)),
-        ui->inImageLabel,
-        SLOT(setPixmap(QPixmap)));
+            &VideoProcessor::inDisplay,
+            ui->inImageLabel,
+            &QLabel::setPixmap);
 
     connect(processor,
-        SIGNAL(outDisplay(QPixmap)),
+        &VideoProcessor::outDisplay,
         ui->outImageLabel,
-        SLOT(setPixmap(QPixmap)));
+        &QLabel::setPixmap);
 
     processor->thread()->start();
 }
@@ -94,6 +94,7 @@ void MainWindow::on_savePushButton_pressed()
     double Contrast = SliderVal2 / 50.0;
 
     cv::Mat inpImage, outImage;
+
 
     inpImage = cv::imread(inputName.toStdString());
 
@@ -178,12 +179,19 @@ void MainWindow::saveSettings()
 void MainWindow::on_brightnessHorizontalSlider_sliderMoved(int position)
 {
    QString brightnessVal = QString("Brightness (%1) : ").arg(position);
+    editor.setMedian(ui->medianBlurRadioButton->isChecked());
+    editor.setGaussian(ui->gaussianBlurRadioButton->isChecked());
     ui->brightnessLabel->setText(brightnessVal);
+    editor.setBrightness(position);
+
 }
 
 // Make the text for the contrast slider responsive to the value it is being changed to
 void MainWindow::on_contrastHorizontalSlider_sliderMoved(int position)
 {
     QString contrastVal = QString("Contrast (%1) : ").arg(position);
-     ui->contrastLabel->setText(contrastVal);
+    editor.setMedian(ui->medianBlurRadioButton->isChecked());
+    editor.setGaussian(ui->gaussianBlurRadioButton->isChecked());
+    ui->contrastLabel->setText(contrastVal);
+    editor.setContrast(position);
 }
