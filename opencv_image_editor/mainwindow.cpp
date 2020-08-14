@@ -16,12 +16,25 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     loadSettings();
+
+    connect(&processor,
+            SIGNAL(inDisplay(QPixmap)),ui->inLabel,SLOT(setPixmap(QPixmap)));
+
+    connect(&processor,
+            SIGNAL(outDisplay(QPixmap)),ui->outLabel,SLOT(setPixmap(QPixmap)));
+    processor.start();
 }
 
 MainWindow::~MainWindow()
 {
+    processor.requestInterruption();
+    processor.wait();
     delete ui;
 }
+
+
+
+
 
 // When hitting browse in the input image section, prompt user to select a file they want to open, and then populate the text field with it.
 void MainWindow::on_inputPushButton_pressed()
