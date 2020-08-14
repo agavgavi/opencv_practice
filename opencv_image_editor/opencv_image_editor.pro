@@ -17,10 +17,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    videoprocessorthread.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    videoprocessorthread.h
 
 FORMS += \
     mainwindow.ui
