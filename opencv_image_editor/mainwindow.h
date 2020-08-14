@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "videoprocessorthread.h"
+#include "videoprocessor.h"
 #include <iostream>
 
 QT_BEGIN_NAMESPACE
@@ -32,7 +32,7 @@ private:
     Ui::MainWindow *ui;
     void loadSettings();
     void saveSettings();
-    VideoProcessorThread processor;
+    VideoProcessor *processor;
 
 protected:
     void closeEvent(QCloseEvent *event);

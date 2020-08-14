@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QSettings>
+#include <QThread>
 
 // Once the UI have been set up, load the predefined settings
 MainWindow::MainWindow(QWidget *parent)
@@ -17,18 +18,37 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     loadSettings();
 
-    connect(&processor,
-            SIGNAL(inDisplay(QPixmap)),ui->inLabel,SLOT(setPixmap(QPixmap)));
+    processor = new VideoProcessor();
+    processor->moveToThread(new QThread(this));
 
-    connect(&processor,
-            SIGNAL(outDisplay(QPixmap)),ui->outLabel,SLOT(setPixmap(QPixmap)));
-    processor.start();
+    connect(processor->thread(),
+        SIGNAL(started()),
+        processor,
+        SLOT(startVideo()));
+
+    connect(processor->thread(),
+        SIGNAL(finished()),
+        processor,
+        SLOT(deleteLater()));
+
+    connect(processor,
+        SIGNAL(inDisplay(QPixmap)),
+        ui->inImageLabel,
+        SLOT(setPixmap(QPixmap)));
+
+    connect(processor,
+        SIGNAL(outDisplay(QPixmap)),
+        ui->outImageLabel,
+        SLOT(setPixmap(QPixmap)));
+
+    processor->thread()->start();
 }
 
 MainWindow::~MainWindow()
 {
-    processor.requestInterruption();
-    processor.wait();
+    processor->stopVideo();
+    processor->thread()->quit();
+    processor->thread()->wait();
     delete ui;
 }
 

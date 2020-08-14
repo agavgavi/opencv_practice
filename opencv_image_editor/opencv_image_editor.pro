@@ -18,11 +18,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    videoprocessorthread.cpp
+    videoprocessor.cpp
 
 HEADERS += \
     mainwindow.h \
-    videoprocessorthread.h
+    videoprocessor.h
 
 FORMS += \
     mainwindow.ui
