@@ -5,8 +5,8 @@
 class OpenCVEditor
 {
 private:
-    int brightness;
-    int contrast;
+    int brightness = 50;
+    int contrast = 50;
     bool gaussianBlur = false;
     bool medianBlur = true;
 public:

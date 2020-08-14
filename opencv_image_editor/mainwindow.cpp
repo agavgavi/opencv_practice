@@ -178,7 +178,7 @@ void MainWindow::saveSettings()
 // Make the text for the brightness slider responsive to the value it is being changed to
 void MainWindow::on_brightnessHorizontalSlider_sliderMoved(int position)
 {
-   QString brightnessVal = QString("Brightness (%1) : ").arg(position);
+    QString brightnessVal = QString("Brightness (%1) : ").arg(position);
     editor.setMedian(ui->medianBlurRadioButton->isChecked());
     editor.setGaussian(ui->gaussianBlurRadioButton->isChecked());
     ui->brightnessLabel->setText(brightnessVal);

@@ -11,8 +11,10 @@ cv::Mat OpenCVEditor::adjustImage(cv::Mat inFrame) {
     cv::Mat outFrame;
     int editBrightness = brightness - 50;
     double editContrast = contrast / 50.0;
-    qDebug() << "brightness:" << editBrightness;
-    qDebug() << "contrast:" << editContrast;
+    qDebug() << "Brightness:" << editBrightness;
+    qDebug() << "Contrast:" << editContrast;
+    qDebug() << "Median:" << medianBlur;
+    qDebug() << "Gaussian:" << gaussianBlur;
 
     if(medianBlur) {
         cv::medianBlur(inFrame, outFrame, 5);
