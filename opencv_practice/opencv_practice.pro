@@ -19,6 +19,7 @@ SOURCES += \
     ImageEditer.cpp \
     ImageFuncs.cpp \
     VideoFuncs.cpp \
+    cascadetest.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -26,6 +27,7 @@ HEADERS += \
     ImageEditer.h \
     ImageFuncs.h \
     VideoFuncs.h \
+    cascadetest.h \
     mainwindow.h
 
 FORMS += \

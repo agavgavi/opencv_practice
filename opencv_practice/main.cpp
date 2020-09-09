@@ -2,6 +2,7 @@
 #include "ImageFuncs.h"
 #include "VideoFuncs.h"
 #include "ImageEditer.h"
+#include "cascadetest.h"
 
 #include <QApplication>
 
