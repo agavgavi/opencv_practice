@@ -31,10 +31,10 @@ MainWindow::MainWindow(QWidget *parent)
         processor,
         &QThread::deleteLater);
 
-    connect(processor,
-            &VideoProcessor::inDisplay,
-            ui->inImageLabel,
-            &QLabel::setPixmap);
+//    connect(processor,
+//            &VideoProcessor::inDisplay,
+//            ui->inImageLabel,
+//            &QLabel::setPixmap);
 
     connect(processor,
         &VideoProcessor::outDisplay,

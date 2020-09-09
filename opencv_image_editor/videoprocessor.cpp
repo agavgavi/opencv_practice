@@ -24,7 +24,8 @@ void VideoProcessor::startVideo() {
         if(inFrame.empty())
             continue;
 
-        outFrame = editor.adjustImage(inFrame);
+        outFrame = editor.detectAndDisplay(inFrame, face_cascade);
+        //outFrame = editor.adjustImage(inFrame);
 
         emit inDisplay(QPixmap::fromImage(
                            QImage(inFrame.data,
