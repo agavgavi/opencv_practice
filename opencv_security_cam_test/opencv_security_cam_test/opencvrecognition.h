@@ -7,6 +7,7 @@ class OpenCVRecognition
 {
 public:
     OpenCVRecognition();
+    cv::Mat DetectAndDisplay(cv::Mat, cv::CascadeClassifier);
 };
 
 #endif // OPENCVRECOGNITION_H

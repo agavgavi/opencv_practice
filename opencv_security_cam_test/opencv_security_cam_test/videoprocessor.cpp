@@ -17,6 +17,7 @@ void VideoProcessor::startVideo() {
     cv::Mat inFrame, outFrame;
     stopped = false;
     camera.set(cv::CAP_PROP_FPS, 30);
+    OpenCVRecognition openCV;
 
 
     while(camera.isOpened() && !stopped) {
@@ -24,9 +25,7 @@ void VideoProcessor::startVideo() {
         if(inFrame.empty())
             continue;
 
-        //outFrame = editor.detectAndDisplay(inFrame, face_cascade);
-        //outFrame = editor.adjustImage(inFrame);
-        outFrame = inFrame;
+        outFrame = openCV.DetectAndDisplay(inFrame, face_cascade);
 
         emit inDisplay(QPixmap::fromImage(
                            QImage(inFrame.data,
