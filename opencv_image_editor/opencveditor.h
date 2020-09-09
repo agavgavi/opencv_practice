@@ -12,6 +12,7 @@ private:
 public:
     OpenCVEditor();
     cv::Mat adjustImage(cv::Mat inFrame);
+    cv::Mat detectAndDisplay(cv::Mat inFrame);
     void setBrightness(int bright) { brightness = bright; }
     void setContrast(int cont) { contrast = cont; }
     void setGaussian(bool blur);

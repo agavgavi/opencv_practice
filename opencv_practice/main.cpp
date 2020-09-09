@@ -130,16 +130,18 @@ int video_funcs(VideoFunctions& vid) {
     return 0;
 }
 
-int main(/*int argc, char *argv[]*/)
+int main(int argc, char *argv[])
 {
 
     ImageEditer editor;
     ImageFunctions img; // Class for all Image tutorials
     VideoFunctions vid; // Class for all Video Tutorials
+
+    CascadeTest test(argc, argv);
     int status = 0;
 
 
-    editor.newEditor("../images/mountains.jpg", "../images/new_mountains.jpg");
+    //editor.newEditor("../images/mountains.jpg", "../images/new_mountains.jpg");
 
 //    status = image_funcs(img); // Do all image functions
 
