@@ -8,6 +8,8 @@ class OpenCVRecognition
 public:
     OpenCVRecognition();
     cv::Mat DetectAndDisplay(cv::Mat, cv::CascadeClassifier);
+private:
+    cv::Mat getAlphaLevel(cv::Mat&);
 };
 
 #endif // OPENCVRECOGNITION_H
