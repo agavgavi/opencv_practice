@@ -3,12 +3,18 @@
 
 #include <QThread>
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget *parent, int argc, char *argv[])
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    processor = new VideoProcessor();
+    if(argc < 2) {
+        option = "lbp_front";
+    }
+    else {
+        option = std::string(argv[1]);
+    }
+    processor = new VideoProcessor(nullptr,option);
     processor->moveToThread(new QThread(this));
 
     connect(processor->thread(),
@@ -22,16 +28,16 @@ MainWindow::MainWindow(QWidget *parent)
         &QThread::deleteLater);
 
     connect(processor,
-            &VideoProcessor::inDisplay,
-            ui->inImageLabel,
-            &QLabel::setPixmap);
-
-    connect(processor,
         &VideoProcessor::outDisplay,
         ui->outImageLabel,
         &QLabel::setPixmap);
 
     processor->thread()->start();
+
+    connect(processor,
+            &VideoProcessor::quitProgram,
+            QApplication::instance(),
+            &QApplication::quit);
 }
 
 MainWindow::~MainWindow()

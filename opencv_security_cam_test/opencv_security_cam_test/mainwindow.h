@@ -13,11 +13,12 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr, int argc = 0, char *argv[] = nullptr);
     ~MainWindow();
 
 private:
     Ui::MainWindow *ui;
     VideoProcessor *processor;
+    std::string option;
 };
 #endif // MAINWINDOW_H

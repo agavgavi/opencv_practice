@@ -9,17 +9,20 @@ class VideoProcessor : public QObject
 {
     Q_OBJECT
 public:
-    explicit VideoProcessor(QObject *parent = nullptr);
+    explicit VideoProcessor(QObject *parent = nullptr, std::string option = "lbp_front");
 
 signals:
-    void inDisplay(QPixmap pixmap);
     void outDisplay(QPixmap pixmap);
+    void quitProgram();
 
 public slots:
     void startVideo();
     void stopVideo();
 private:
     bool stopped;
+    std::string option;
+    std::string url;
+    std::string folder;
 };
 
 #endif // VIDEOPROCESSOR_H

@@ -6,10 +6,14 @@
 class OpenCVRecognition
 {
 public:
-    OpenCVRecognition();
+    OpenCVRecognition(std::string folder_);
     cv::Mat DetectAndDisplay(cv::Mat, cv::CascadeClassifier);
 private:
     cv::Mat getAlphaLevel(cv::Mat&);
+    bool saveImage(std::string, cv::Mat);
+    int faces_amt;
+    std::string folder;
+    int imCount;
 };
 
 #endif // OPENCVRECOGNITION_H
